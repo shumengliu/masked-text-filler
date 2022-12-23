@@ -1,0 +1,10 @@
+# Program config
+source_path: './base.txt'
+output_dir: './output/'
+output_filename: 'my_output.txt'
+
+# Masks to replace
+masks:
+  Company Name: DearEmployer
+  Job Title: FantasticJob
+  My Name: MyName

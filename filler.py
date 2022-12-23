@@ -1,21 +1,24 @@
 import os
+import yaml
+import logging
 
-# Change those field to generate a new letter
-OUTPUT_PATH = "./output/cover-letter-personify.txt"
-JOB_TITLE = "Java Software Engineer"
-COMPANY_NAME = "Personify"
+with open('config.yaml') as f:
+    config = yaml.load(f, Loader=yaml.FullLoader)
 
-# Map tokens to variables
-ENTITY_MAP = {
-    '[Job Title]': JOB_TITLE,
-    '[Company Name]': COMPANY_NAME,
-}
+OUTPUT_PATH = config['output_dir'] + config['output_filename']
+BASE_PATH = config['source_path']
 
+masks_raw = config['masks']
+masks = {}
+for mask in masks_raw:
+    braced_mask = '[' + mask + ']'
+    masks.update({braced_mask: masks_raw[mask]})
+
+for k in masks:
+    print(k)
+    print(masks[k])
 
 # Global static
-BASE_PATH = "cover-letter-base.txt"
-
-
 
 def get_base_text() -> str:
     with open(BASE_PATH, 'r') as f:
@@ -38,5 +41,5 @@ def write_to_file(path, content):
 
 if __name__ == "__main__":
     base = get_base_text()
-    replaced = replace_keywords(base, ENTITY_MAP)
+    replaced = replace_keywords(base, masks)
     write_to_file(OUTPUT_PATH, replaced)
