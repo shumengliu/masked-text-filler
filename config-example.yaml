@@ -5,6 +5,6 @@ output_filename: 'my_output.txt'
 
 # Masks to replace
 masks:
-  Company Name: DearEmployer
+  Company Name: DreamCompany
   Job Title: FantasticJob
-  My Name: MyName
+  My Name: BrilliantName
